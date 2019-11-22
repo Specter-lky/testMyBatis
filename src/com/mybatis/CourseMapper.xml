@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CourseDao">
+    <select id="selectCourseById" parameterType="Integer" resultType="com.po.course">
+        select * from course where id=#{id}
+    </select>
+    <select id="selectAllCourse" resultType="com.po.course">
+        select * from course
+    </select>
+    <insert id="addCourse" parameterType="com.po.course">
+        insert into course (id,title,credits) values(#{id},#{title},#{credits})
+    </insert>
+    <update id="updateCourse" parameterType="com.po.course">
+        update course set title=#{title},credits=#{credits} where id=#{id}
+    </update>
+
+</mapper>

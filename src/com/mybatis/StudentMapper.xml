@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StudentDao">
+    <select id="selectStudentById" parameterType="Integer" resultType="com.po.student">
+        select * from student where id=#{id}
+    </select>
+    <select id="selectAllStudent" resultType="com.po.student">
+        select * from student
+    </select>
+    <insert id="addStudent" parameterType="com.po.student">
+        insert into student (id,name,grade) values(#{id},#{name},#{grade})
+    </insert>
+    <update id="updateStudent" parameterType="com.po.student">
+        update student set name=#{name},grade=#{grade} where id=#{id}
+    </update>
+    <resultMap type="com.po.student" id="studentAndcourses">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="grade" column="grade"/>
+        <collection property="courses" ofType="com.po.course">
+            <id property="id" column="cid"/>
+            <result property="title" column="title"/>
+            <result property="credits" column="credits"/>
+        </collection>
+    </resultMap>
+    <select id="selectAllstudentAndcourses" resultMap="studentAndcourses">
+        select s.*,c.id as cid,title,credits
+        from student s,course c,selection sc
+        where studentId=s.id
+        and courseId=c.id
+    </select>
+</mapper>

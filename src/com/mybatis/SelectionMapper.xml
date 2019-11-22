@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SelectionDao">
+    <select id="selectSelectionById" parameterType="Integer" resultType="com.po.selection">
+        select * from selection where studentid=#{studentid}
+    </select>
+    <select id="selectAllSelection" resultType="com.po.selection">
+        select * from selection
+    </select>
+    <insert id="addSelection" parameterType="com.po.selection">
+        insert into selection (studentId,courseId,time) values(#{studentId},#{courseId},#{time})
+    </insert>
+    <update id="updateSelection" parameterType="com.po.selection">
+        update selection set time=#{time} where studentId=#{studentId} and courseId=#{courseId}
+    </update>
+</mapper>
